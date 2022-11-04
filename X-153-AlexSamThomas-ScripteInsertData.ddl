@@ -76,7 +76,7 @@ INSERT INTO `t_personRole` (`fkPerson`, `fkRole`) VALUES
 -- Déchargement des données de la table `t_teacher`
 --
 
-INSERT INTO `t_teacher` (`fkPerson`, `acronym`, `fkSection`) VALUES
+INSERT INTO `t_teacher` (`idPerson`, `acronym`, `fkSection`) VALUES
 (0xb20828165bb211ed937a0242ac120002, 'pee', 0xb20077c45bb211ed937a0242ac120002),
 (0xb20829385bb211ed937a0242ac120002, 'kjy', 0xb2007bb05bb211ed937a0242ac120002),
 (0xb2082a4c5bb211ed937a0242ac120002, 'jby', 0xb2007dc55bb211ed937a0242ac120002),
@@ -88,7 +88,7 @@ INSERT INTO `t_teacher` (`fkPerson`, `acronym`, `fkSection`) VALUES
 -- Déchargement des données de la table `t_formationPlan`
 --
 
-INSERT INTO `t_formationPlan` (`idFormation`, `name`, `desription`, `startYear`, `endYear`, `fkPerson`) VALUES
+INSERT INTO `t_formationPlan` (`idFormation`, `name`, `description`, `startYear`, `endYear`, `fkPerson`) VALUES
 (0xed6100165bb511ed937a0242ac120002, 'ICT', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '2018-11-10', '2022-11-10', 0xb2082c745bb211ed937a0242ac120002),
 (0xed6106065bb511ed937a0242ac120002, 'ICT avec maturité', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '2019-11-10', '2022-11-10', 0xb2082b5f5bb211ed937a0242ac120002),
 (0xed61070e5bb511ed937a0242ac120002, 'Plan 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', '2020-11-10', '2022-11-10', 0xb2082a4c5bb211ed937a0242ac120002),
@@ -113,7 +113,7 @@ INSERT INTO `t_class` (`idClass`, `name`, `fkPerson`, `fkFormation`) VALUES
 -- Déchargement des données de la table `t_student`
 --
 
-INSERT INTO `t_student` (`fkPerson`, `fkSection`, `fkClass`) VALUES
+INSERT INTO `t_student` (`idPerson`, `fkSection`, `fkClass`) VALUES
 (0xb20818d15bb211ed937a0242ac120002, 0xb20077c45bb211ed937a0242ac120002, 0xad97273f5bb611ed937a0242ac120002),
 (0xb2081fcf5bb211ed937a0242ac120002, 0xb20077c45bb211ed937a0242ac120002, 0xad97273f5bb611ed937a0242ac120002),
 (0xb20823425bb211ed937a0242ac120002, 0xb2007bb05bb211ed937a0242ac120002, 0xad972b865bb611ed937a0242ac120002),
@@ -125,12 +125,12 @@ INSERT INTO `t_student` (`fkPerson`, `fkSection`, `fkClass`) VALUES
 -- Déchargement des données de la table `t_TPI`
 --
 
-INSERT INTO `t_TPI` (`idTPI`, `grade`, `fkPerson`) VALUES
-(0xdfd2cb535bb711ed937a0242ac120002, 5.25, 0xb20818d15bb211ed937a0242ac120002),
-(0xdfd2cf715bb711ed937a0242ac120002, 3.7, 0xb2081fcf5bb211ed937a0242ac120002),
-(0xdfd2d19b5bb711ed937a0242ac120002, 4.75, 0xb20823425bb211ed937a0242ac120002),
-(0xdfd2d2795bb711ed937a0242ac120002, 5.35, 0xb20825bd5bb211ed937a0242ac120002),
-(0xdfd2d2da5bb711ed937a0242ac120002, 3.84, 0xb20826f35bb211ed937a0242ac120002);
+INSERT INTO `t_TPI` (`idTPI`, `grade`,`passageDate`, `fkPerson`) VALUES
+(0xdfd2cb535bb711ed937a0242ac120002, 5.25,'2022-11-10', 0xb20818d15bb211ed937a0242ac120002),
+(0xdfd2cf715bb711ed937a0242ac120002, 3.7,'2022-11-10', 0xb2081fcf5bb211ed937a0242ac120002),
+(0xdfd2d19b5bb711ed937a0242ac120002, 4.75,'2022-11-10', 0xb20823425bb211ed937a0242ac120002),
+(0xdfd2d2795bb711ed937a0242ac120002, 5.35,'2022-11-10', 0xb20825bd5bb211ed937a0242ac120002),
+(0xdfd2d2da5bb711ed937a0242ac120002, 3.84,'2022-11-10', 0xb20826f35bb211ed937a0242ac120002);
 
 
 

@@ -49,7 +49,7 @@ CREATE TABLE `t_class` (
 CREATE TABLE `t_formationPlan` (
   `idFormation` binary(16) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `desription` varchar(400) NOT NULL,
+  `description` varchar(400) NOT NULL,
   `startYear` date NOT NULL,
   `endYear` date NOT NULL,
   `fkPerson` binary(16) NOT NULL
@@ -176,7 +176,7 @@ CREATE TABLE `t_section` (
 --
 
 CREATE TABLE `t_student` (
-  `fkPerson` binary(16) NOT NULL,
+  `idPerson` binary(16) NOT NULL,
   `fkSection` binary(16) NOT NULL,
   `fkClass` binary(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -189,7 +189,7 @@ CREATE TABLE `t_student` (
 --
 
 CREATE TABLE `t_teacher` (
-  `fkPerson` binary(16) NOT NULL,
+  `idPerson` binary(16) NOT NULL,
   `acronym` varchar(5) NOT NULL,
   `fkSection` binary(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -204,6 +204,7 @@ CREATE TABLE `t_teacher` (
 CREATE TABLE `t_TPI` (
   `idTPI` binary(16) NOT NULL,
   `grade` float NOT NULL,
+  `passageDate` date NOT NULL,
   `fkPerson` binary(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -307,8 +308,8 @@ ALTER TABLE `t_section`
 -- Index pour la table `t_student`
 --
 ALTER TABLE `t_student`
-  ADD PRIMARY KEY (`fkPerson`),
-  ADD UNIQUE KEY `FKt_p_t_s_IND` (`fkPerson`),
+  ADD PRIMARY KEY (`idPerson`),
+  ADD UNIQUE KEY `FKt_p_t_s_IND` (`idPerson`),
   ADD KEY `FKpartOf_IND` (`fkSection`),
   ADD KEY `FKisIn_IND` (`fkClass`);
 
@@ -316,8 +317,8 @@ ALTER TABLE `t_student`
 -- Index pour la table `t_teacher`
 --
 ALTER TABLE `t_teacher`
-  ADD PRIMARY KEY (`fkPerson`),
-  ADD UNIQUE KEY `FKt_p_t_t_IND` (`fkPerson`),
+  ADD PRIMARY KEY (`idPerson`),
+  ADD UNIQUE KEY `FKt_p_t_t_IND` (`idPerson`),
   ADD KEY `FKbelong_IND` (`fkSection`);
 
 --
@@ -344,13 +345,13 @@ ALTER TABLE `t_type`
 --
 ALTER TABLE `t_class`
   ADD CONSTRAINT `FKhave_FK` FOREIGN KEY (`fkFormation`) REFERENCES `t_formationPlan` (`idFormation`),
-  ADD CONSTRAINT `FKmanage_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_teacher` (`fkPerson`);
+  ADD CONSTRAINT `FKmanage_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_teacher` (`idPerson`);
 
 --
 -- Contraintes pour la table `t_formationPlan`
 --
 ALTER TABLE `t_formationPlan`
-  ADD CONSTRAINT `FKattribute_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_teacher` (`fkPerson`);
+  ADD CONSTRAINT `FKattribute_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_teacher` (`idPerson`);
 
 --
 -- Contraintes pour la table `t_formationPlanLesson`
@@ -364,7 +365,7 @@ ALTER TABLE `t_formationPlanLesson`
 --
 ALTER TABLE `t_grade`
   ADD CONSTRAINT `FKassign_FK` FOREIGN KEY (`fkLesson`) REFERENCES `t_lesson` (`idLesson`),
-  ADD CONSTRAINT `FKgrant_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_student` (`fkPerson`);
+  ADD CONSTRAINT `FKgrant_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_student` (`idPerson`);
 
 --
 -- Contraintes pour la table `t_lesson`
@@ -391,20 +392,20 @@ ALTER TABLE `t_personRole`
 ALTER TABLE `t_student`
   ADD CONSTRAINT `FKisIn_FK` FOREIGN KEY (`fkClass`) REFERENCES `t_class` (`idClass`),
   ADD CONSTRAINT `FKpartOf_FK` FOREIGN KEY (`fkSection`) REFERENCES `t_section` (`idSection`),
-  ADD CONSTRAINT `FKt_p_t_s_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_person` (`idPerson`);
+  ADD CONSTRAINT `FKt_p_t_s_FK` FOREIGN KEY (`idPerson`) REFERENCES `t_person` (`idPerson`);
 
 --
 -- Contraintes pour la table `t_teacher`
 --
 ALTER TABLE `t_teacher`
   ADD CONSTRAINT `FKbelong_FK` FOREIGN KEY (`fkSection`) REFERENCES `t_section` (`idSection`),
-  ADD CONSTRAINT `FKt_p_t_t_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_person` (`idPerson`);
+  ADD CONSTRAINT `FKt_p_t_t_FK` FOREIGN KEY (`idPerson`) REFERENCES `t_person` (`idPerson`);
 
 --
 -- Contraintes pour la table `t_TPI`
 --
 ALTER TABLE `t_TPI`
-  ADD CONSTRAINT `FKpass_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_student` (`fkPerson`);
+  ADD CONSTRAINT `FKpass_FK` FOREIGN KEY (`fkPerson`) REFERENCES `t_student` (`idPerson`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
